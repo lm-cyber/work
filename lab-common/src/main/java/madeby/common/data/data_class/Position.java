@@ -1,4 +1,4 @@
-package madeby.client.data;
+package madeby.common.data.data_class;
 
 public enum Position {
     MANAGER,

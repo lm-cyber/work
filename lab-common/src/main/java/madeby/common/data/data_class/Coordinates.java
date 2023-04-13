@@ -1,4 +1,4 @@
-package madeby.client.data;
+package madeby.common.data.data_class;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
