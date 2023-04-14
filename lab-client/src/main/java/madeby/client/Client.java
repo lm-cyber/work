@@ -2,6 +2,7 @@ package madeby.client;
 
 import com.google.gson.JsonSyntaxException;
 import madeby.client.util.Console;
+import madeby.common.Exception.DontCorrectJsonException;
 import madeby.common.util.CollectionManager;
 import madeby.common.util.CommandManager;
 import madeby.common.util.FileManager;
@@ -20,19 +21,21 @@ public final class Client {
 
         final OutputManager outputManager = new OutputManager();
 
-        if (args.length == 0) {
-            outputManager.println("This program needs a file in argument to work with.");
+
+        String filePath = System.getenv("DATAFORLAB5");
+        if ("".equals(filePath) || filePath == null) {
+            outputManager.println("This program needs a file name in envvar to work with.");
             return;
         }
 
-        if (!args[0].endsWith(".json")) {
+        if (!filePath.endsWith(".json")) {
             outputManager.println("This program can only work with .json file.");
             return;
         }
         try (InputManager inputManager = new InputManager()) {
 
             final CollectionManager collectionManager = new CollectionManager();
-            final FileManager fileManager = new FileManager(args[0]);
+            final FileManager fileManager = new FileManager(filePath);
             final CommandManager commandManager = new CommandManager(fileManager, inputManager, collectionManager, outputManager);
             final Console console = new Console(fileManager,
                     inputManager, collectionManager, outputManager,
@@ -45,6 +48,8 @@ public final class Client {
                 outputManager.println("The file does not keep data in correct format.");
             } catch (NoSuchElementException e) {
                 outputManager.println("EOF");
+            } catch (DontCorrectJsonException e) {
+                outputManager.print(e.getMessage() + '\n');
             }
         }
     }

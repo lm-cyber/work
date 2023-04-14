@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -34,11 +36,28 @@ public class Worker implements Comparable<Worker> {
 
 
     public String getDayOfCreationDate() {
-        return Integer.toString(creationDate.getDay());
+        String pattern = "dd/MM/yyyy";
+        DateFormat df = new SimpleDateFormat(pattern);
+        return df.format(creationDate);
+
     }
 
     @Override
     public int compareTo(@NonNull Worker worker) {
         return worker.getSalary().compareTo(this.getSalary());
+    }
+
+    @Override
+    public String toString() {
+        return "Worker"
+                + "\nid=" + id
+                + "\nname=" + name
+                + "\ncoordinates=" + coordinates
+                + "\ncreationDate=" + creationDate
+                + "\nsalary=" + salary
+                + "\nposition=" + position
+                + "\nstatus=" + status
+                + "\norganization=" + organization
+                + '\n';
     }
 }

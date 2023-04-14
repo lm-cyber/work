@@ -129,7 +129,7 @@ public class InputManager implements AutoCloseable {
                 if (floatResult != null) {
                     shouldContinue = floatPredicate.test(floatResult);
                 } else {
-                    shouldContinue = false;
+                    shouldContinue = true;
                 }
             } catch (NumberFormatException e) {
                 shouldContinue = true; // codestyle`

@@ -21,4 +21,9 @@ public class Organization {
     private Float annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
     @NonNull
     private Long employeesCount; //Поле не может быть null, Значение поля должно быть больше 0
+
+    @Override
+    public String toString() {
+        return "\n\tOrganization" + "\n\t\tfullName=" + fullName + "\n\t\tannualTurnover=" + annualTurnover + "\n\t\temployeesCount=" + employeesCount + '\n';
+    }
 }

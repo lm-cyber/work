@@ -1,6 +1,7 @@
 package madeby.client.util;
 
 import com.google.gson.JsonSyntaxException;
+import madeby.common.Exception.DontCorrectJsonException;
 import madeby.common.commands.CommandResult;
 import madeby.common.data.data_class.Worker;
 import madeby.common.util.CollectionManager;
@@ -32,12 +33,11 @@ public class Console {
         this.commandManager = commandManager;
     }
 
-    public void start() throws IllegalArgumentException, JsonSyntaxException, IOException {
+    public void start() throws IllegalArgumentException, JsonSyntaxException, IOException, DontCorrectJsonException {
         StringBuilder stringData = fileManager.read();
 
         PriorityQueue<Worker> workers = JsonParser.toData(String.valueOf(stringData));
         collectionManager.initData(workers);
-
         startCommandCycle();
     }
 

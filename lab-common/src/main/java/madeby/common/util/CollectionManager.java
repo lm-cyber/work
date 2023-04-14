@@ -1,5 +1,6 @@
 package madeby.common.util;
 
+import madeby.common.Exception.DontCorrectJsonException;
 import madeby.common.data.data_class.Position;
 import madeby.common.data.data_class.Worker;
 
@@ -34,8 +35,17 @@ public class CollectionManager {
     }
 
     // to do valid data init !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void initData(PriorityQueue<Worker> workers) {
+    public void initData(PriorityQueue<Worker> workers) throws DontCorrectJsonException {
         for (Worker worker : workers) {
+            if (worker.getId() < 0) {
+                throw new DontCorrectJsonException("id < 0");
+            }
+            if (dataIds.contains(worker.getId())) {
+                throw new DontCorrectJsonException("id constain");
+            }
+            if (organizationNameCheck(worker.getOrganization().getFullName())) {
+                throw new DontCorrectJsonException("fullname of organization contain");
+            }
             this.dataCollection.add(worker);
             this.dataIds.add(worker.getId());
             this.organiztionNames.add(worker.getOrganization().getFullName());
@@ -92,11 +102,21 @@ public class CollectionManager {
     public long removeAllByPosition(Position position) {
         if (position == null) {
             long count = dataCollection.stream().filter((x -> x.getPosition() == null)).count();
-            dataCollection.removeAll(dataCollection.stream().filter(x -> x.getPosition() == null).toList());
+            List<Worker> workers = dataCollection.stream().filter(x -> x.getPosition() == null).toList();
+            for (Worker worker : workers) {
+                dataIds.remove(worker.getId());
+                organiztionNames.remove(worker.getOrganization().getFullName());
+            }
+            dataCollection.removeAll(workers);
             return count;
         }
         long count = dataCollection.stream().filter((x -> position.equals(x.getPosition()))).count();
-        dataCollection.removeAll(dataCollection.stream().filter(x -> position.equals(x.getPosition())).toList());
+        List<Worker> workers = dataCollection.stream().filter(x -> position.equals(x.getPosition())).toList();
+        for (Worker worker : workers) {
+            dataIds.remove(worker.getId());
+            organiztionNames.remove(worker.getOrganization().getFullName());
+        }
+        dataCollection.removeAll(workers);
         return count;
     }
 
