@@ -1,5 +1,7 @@
 package madeby.common.commands;
 
-public class Command {
+public abstract class Command {
+
+    public abstract CommandResult execute(String arg);
 
 }
