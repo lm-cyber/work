@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @Data
-public class Worker implements Comparable<Worker>{
+public class Worker implements Comparable<Worker> {
 
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @NonNull
@@ -33,9 +33,10 @@ public class Worker implements Comparable<Worker>{
     private Organization organization; //Поле не может быть null
 
 
-    public int getDayOfCreationDate(){
-        return creationDate.getDay();
+    public String getDayOfCreationDate() {
+        return Integer.toString(creationDate.getDay());
     }
+
     @Override
     public int compareTo(@NonNull Worker worker) {
         return worker.getSalary().compareTo(this.getSalary());

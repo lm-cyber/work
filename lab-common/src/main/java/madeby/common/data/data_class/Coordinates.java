@@ -15,4 +15,9 @@ public class Coordinates {
     private float x; //Максимальное значение поля: 826
     @NonNull
     private Float y; //Значение поля должно быть больше -180, Поле не может быть null
+
+    @Override
+    public String toString() {
+        return "Coordinates{" + "x=" + x + ", y=" + y + '}';
+    }
 }

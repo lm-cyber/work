@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExecuteScriptCommand extends Command{
+public class ExecuteScriptCommand extends Command {
     private List<String> args;
     private final InputManager inputManager;
 

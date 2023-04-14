@@ -6,7 +6,7 @@ import madeby.common.util.InputManager;
 import madeby.common.util.OutputManager;
 import madeby.common.util.WorkerCreator;
 
-public class UpdateCommand extends Command{
+public class UpdateCommand extends Command {
     private final CollectionManager collectionManager;
     private final InputManager inputManager;
     private final OutputManager outputManager;
@@ -25,9 +25,9 @@ public class UpdateCommand extends Command{
         } catch (NumberFormatException e) {
             return new CommandResult("Your argument was incorrect. The command was not executed.");
         }
-        if(collectionManager.removeByID(id)) {
+        if (collectionManager.removeByID(id)) {
             Worker worker = WorkerCreator.createWorker(inputManager, outputManager, collectionManager);
-            collectionManager.update(worker,id);
+            collectionManager.update(worker, id);
             return new CommandResult("Worker create");
         }
         return new CommandResult("haven't id in collection");

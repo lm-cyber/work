@@ -19,6 +19,6 @@ public class RemoveGreaterCommand extends Command {
     @Override
     public CommandResult execute(String arg) {
         Long count = collectionManager.removeGreaterThanThis(WorkerCreator.createWorker(inputManager, outputManager, collectionManager));
-        return new CommandResult("remove "+ count.toString());
+        return new CommandResult("remove " + count.toString());
     }
 }

@@ -6,7 +6,7 @@ import madeby.common.util.InputManager;
 import madeby.common.util.OutputManager;
 import madeby.common.util.WorkerCreator;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final CollectionManager collectionManager;
     private final InputManager inputManager;
     private final OutputManager outputManager;
@@ -19,7 +19,7 @@ public class AddCommand extends Command{
 
     @Override
     public CommandResult execute(String arg) {
-        Worker worker = WorkerCreator.createWorker(inputManager,outputManager,collectionManager);
+        Worker worker = WorkerCreator.createWorker(inputManager, outputManager, collectionManager);
         collectionManager.add(worker);
         return new CommandResult("Worker create");
     }

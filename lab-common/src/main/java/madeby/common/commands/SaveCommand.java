@@ -6,7 +6,7 @@ import madeby.common.util.JsonParser;
 
 import java.io.FileNotFoundException;
 
-public class SaveCommand extends Command{
+public class SaveCommand extends Command {
     private final CollectionManager collectionManager;
     private final FileManager fileManager;
 

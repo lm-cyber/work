@@ -1,12 +1,11 @@
 package madeby.common.commands;
 
 import madeby.common.util.CollectionManager;
-import madeby.common.util.OutputManager;
 
-public class RemoveFirstCommand extends Command{
+public class RemoveFirstCommand extends Command {
     private CollectionManager collectionManager;
 
-    public RemoveFirstCommand(CollectionManager collectionManager, OutputManager outputManager) {
+    public RemoveFirstCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }
 

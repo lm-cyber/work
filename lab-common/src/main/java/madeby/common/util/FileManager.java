@@ -1,9 +1,10 @@
 package madeby.common.util;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class FileManager {
     private final String path;
@@ -12,12 +13,13 @@ public class FileManager {
         this.path = filename;
     }
 
-    public StringBuilder read() throws FileNotFoundException {
-        File file = new File(this.path);
+    public StringBuilder read() throws IOException {
+        FileReader fileReader = new FileReader(this.path);
         StringBuilder json = new StringBuilder("");
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                json.append(scanner.nextLine()).append('\n');
+        try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                json.append(line).append('\n');
             }
         }
         return json;

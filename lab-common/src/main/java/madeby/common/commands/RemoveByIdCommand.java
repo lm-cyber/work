@@ -4,7 +4,7 @@ import madeby.common.util.CollectionManager;
 import madeby.common.util.InputManager;
 import madeby.common.util.OutputManager;
 
-public class RemoveByIdCommand extends Command{
+public class RemoveByIdCommand extends Command {
     private final CollectionManager collectionManager;
     private final InputManager inputManager;
     private final OutputManager outputManager;
@@ -17,13 +17,13 @@ public class RemoveByIdCommand extends Command{
 
     @Override
     public CommandResult execute(String arg) {
-        Integer id;
+        int id;
         try {
             id = Integer.parseInt(arg);
         } catch (NumberFormatException e) {
             return new CommandResult("Your argument was incorrect. The command was not executed.");
         }
-        if(collectionManager.removeByID(id)) {
+        if (collectionManager.removeByID(id)) {
             return new CommandResult("remove success");
         }
         return new CommandResult("haven't id in collection");

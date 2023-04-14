@@ -3,7 +3,12 @@ package madeby.common.util;
 import madeby.common.data.data_class.Position;
 import madeby.common.data.data_class.Worker;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 public class CollectionManager {
@@ -59,11 +64,12 @@ public class CollectionManager {
         return dataCollection.isEmpty();
     }
 
-    public Map<Date,List<Worker>> guopByDate(){
-        Map<Date, List<Worker>> groupedByDate = dataCollection.stream()
+    public Map<String, List<Worker>> guopByDate() {
+        Map<String, List<Worker>> groupedByDate = dataCollection.stream()
                 .collect(Collectors.groupingBy(Worker::getDayOfCreationDate));
         return groupedByDate;
     }
+
     public List<Worker> getAllByPosition(Position position) {
         if (position == null) {
             return dataCollection.stream().filter(x -> x.getPosition() == null).toList();
@@ -122,6 +128,7 @@ public class CollectionManager {
         }
         return false;
     }
+
 
     public PriorityQueue<Worker> getDataCollection() {
         return dataCollection;

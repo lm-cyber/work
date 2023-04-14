@@ -2,7 +2,7 @@ package madeby.common.commands;
 
 import madeby.common.util.CollectionManager;
 
-public class ClearCommand extends Command{
+public class ClearCommand extends Command {
     private final CollectionManager collectionManager;
 
     public ClearCommand(CollectionManager collectionManager) {

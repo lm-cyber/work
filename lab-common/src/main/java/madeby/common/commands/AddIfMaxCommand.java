@@ -6,7 +6,7 @@ import madeby.common.util.InputManager;
 import madeby.common.util.OutputManager;
 import madeby.common.util.WorkerCreator;
 
-public class AddIfMaxCommand extends Command{
+public class AddIfMaxCommand extends Command {
     private final OutputManager outputManager;
     private final CollectionManager collectionManager;
     private final InputManager inputManager;
@@ -20,8 +20,8 @@ public class AddIfMaxCommand extends Command{
     @Override
     public CommandResult execute(String arg) {
 
-        Worker worker = WorkerCreator.createWorker(inputManager,outputManager,collectionManager);
-        if(collectionManager.addIfMax(worker)){
+        Worker worker = WorkerCreator.createWorker(inputManager, outputManager, collectionManager);
+        if (collectionManager.addIfMax(worker)) {
             return new CommandResult("add success");
         }
         return new CommandResult("not max salary value");

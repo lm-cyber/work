@@ -2,7 +2,7 @@ package madeby.common.commands;
 
 import madeby.common.util.CollectionManager;
 
-public class InfoCommand extends Command{
+public class InfoCommand extends Command {
     private final CollectionManager collectionManager;
 
     public InfoCommand(CollectionManager collectionManager) {
