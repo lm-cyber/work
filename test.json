@@ -1,82 +1,14 @@
 [
   {
     "id": 0,
-    "name": "asda",
+    "name": "21",
     "coordinates": {
-      "x": 12.0,
-      "y": 13.0
+      "x": 123.0,
+      "y": 123
     },
-    "creationDate": "2023-04-14T18:21:00MSK",
-    "salary": 133,
-    "status": "HIRED",
-    "organization": {
-      "fullName": "asdasggg",
-      "annualTurnover": 123.0,
-      "employeesCount": 123
-    }
-  },
-  {
-    "id": 1,
-    "name": "asda",
-    "coordinates": {
-      "x": 12.0,
-      "y": 13.0
-    },
-    "creationDate": "2023-04-11T18:21:00MSK",
-    "salary": 133,
-    "status": "HIRED",
-    "organization": {
-      "fullName": "123*",
-      "annualTurnover": 123.0,
-      "employeesCount": 123
-    }
-  },
-  {
-    "id": 2,
-    "name": "asda",
-    "coordinates": {
-      "x": 12.0,
-      "y": 13.0
-    },
-    "creationDate": "2023-04-14T18:21:00MSK",
-    "salary": 133,
-    "status": "HIRED",
-    "organization": {
-      "fullName": "oreg",
-      "annualTurnover": 123.0,
-      "employeesCount": 123
-    }
-  },
-  {
-    "id": 3,
-    "name": "asda",
-    "coordinates": {
-      "x": 12.0,
-      "y": 13.0
-    },
-    "creationDate": "2023-04-14T18:21:09MSK",
-    "salary": 133,
-    "status": "HIRED",
-    "organization": {
-      "fullName": "123",
-      "annualTurnover": 123.0,
-      "employeesCount": 12
-    }
-  },
-  {
-    "id": 4,
-    "name": "asda",
-    "coordinates": {
-      "x": 12.0,
-      "y": 13.0
-    },
-    "creationDate": "2023-04-14T18:21:09MSK",
-    "salary": 133,
-    "status": "HIRED",
-    "organization": {
-      "fullName": "asdadsasddas",
-      "annualTurnover": 123.0,
-      "employeesCount": 123
-    }
+    "creationDate": "2023-04-19T13:15:16MSK",
+    "enginePower": 213,
+    "capacity": 333,
+    "distanceTravelled": 123231
   }
 ]

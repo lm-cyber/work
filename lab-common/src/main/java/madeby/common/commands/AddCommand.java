@@ -1,10 +1,10 @@
 package madeby.common.commands;
 
-import madeby.common.data.data_class.Worker;
+import madeby.common.data.data_class.Vehicle;
 import madeby.common.util.CollectionManager;
 import madeby.common.util.InputManager;
 import madeby.common.util.OutputManager;
-import madeby.common.util.WorkerCreator;
+import madeby.common.util.VehicleCreator;
 
 public class AddCommand extends Command {
     private final CollectionManager collectionManager;
@@ -19,8 +19,8 @@ public class AddCommand extends Command {
 
     @Override
     public CommandResult execute(String arg) {
-        Worker worker = WorkerCreator.createWorker(inputManager, outputManager, collectionManager);
-        collectionManager.add(worker);
-        return new CommandResult("Worker create");
+        Vehicle vehicle = VehicleCreator.createVehicle(inputManager, outputManager, collectionManager);
+        collectionManager.add(vehicle);
+        return new CommandResult("Vehicle create");
     }
 }

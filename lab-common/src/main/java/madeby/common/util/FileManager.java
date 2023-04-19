@@ -1,10 +1,9 @@
 package madeby.common.util;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class FileManager {
     private final String path;
@@ -25,9 +24,10 @@ public class FileManager {
         return json;
     }
 
-    public void write(String json) throws FileNotFoundException {
-        try (PrintWriter printWriter = new PrintWriter(path)) {
-            printWriter.write(json);
+    public void write(String json) throws IOException {
+        try (FileWriter fileWriter = new FileWriter(path)) {
+            fileWriter.write(json);
+
         }
     }
 }

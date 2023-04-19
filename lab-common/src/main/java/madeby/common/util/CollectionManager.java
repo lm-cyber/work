@@ -1,29 +1,24 @@
 package madeby.common.util;
 
 import madeby.common.Exception.DontCorrectJsonException;
-import madeby.common.data.data_class.Position;
-import madeby.common.data.data_class.Worker;
+import madeby.common.data.data_class.Vehicle;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 public class CollectionManager {
-    private final PriorityQueue<Worker> dataCollection;
+    private final ArrayList<Vehicle> dataCollection;
     private final HashSet<Integer> dataIds;
-    private final HashSet<String> organiztionNames;
     private final Date date;
     private int idIterator;
 
 
     public CollectionManager() {
-        this.dataCollection = new PriorityQueue<>();
+        this.dataCollection = new ArrayList<>();
         this.dataIds = new HashSet<>();
-        this.organiztionNames = new HashSet<>();
         this.date = new Date();
         this.idIterator = 0;
     }
@@ -31,25 +26,28 @@ public class CollectionManager {
     public void clear() {
         this.dataCollection.clear();
         this.dataIds.clear();
-        this.organiztionNames.clear();
     }
 
-    // to do valid data init !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public void initData(PriorityQueue<Worker> workers) throws DontCorrectJsonException {
-        for (Worker worker : workers) {
-            if (worker.getId() < 0) {
+    public void initData(ArrayList<Vehicle> vehicles) throws DontCorrectJsonException {
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getId() < 0) {
                 throw new DontCorrectJsonException("id < 0");
             }
-            if (dataIds.contains(worker.getId())) {
+            if (dataIds.contains(vehicle.getId())) {
                 throw new DontCorrectJsonException("id constain");
             }
-            if (organizationNameCheck(worker.getOrganization().getFullName())) {
-                throw new DontCorrectJsonException("fullname of organization contain");
-            }
-            this.dataCollection.add(worker);
-            this.dataIds.add(worker.getId());
-            this.organiztionNames.add(worker.getOrganization().getFullName());
+
+            this.dataCollection.add(vehicle);
+            this.dataIds.add(vehicle.getId());
         }
+    }
+
+    public ArrayList<Vehicle> printDescending() {
+        return dataCollection.stream().sorted(Collections.reverseOrder()).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<Vehicle> filterStartsWithName(String nameStart) {
+        return dataCollection.stream().filter(x -> x.getName().startsWith(nameStart)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     private int getNewId() {
@@ -59,111 +57,80 @@ public class CollectionManager {
         return idIterator;
     }
 
-    public void update(Worker worker, Integer id) {
-        worker.setId(id);
-        this.dataCollection.add(worker);
-        this.dataIds.add(worker.getId());
-        this.organiztionNames.add(worker.getOrganization().getFullName());
+    public boolean update(Vehicle vehicle, Integer id) {
+        if (removeByID(id)) {
+            vehicle.setId(id);
+            this.dataCollection.add(vehicle);
+            this.dataIds.add(vehicle.getId());
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Vehicle> getCopyOfData() {
+        return (ArrayList<Vehicle>) dataCollection.clone();
+    }
+
+    public void removeFirst() {
+        dataCollection.remove(0);
+    }
+
+    public boolean insertAt(Vehicle vehicle, Integer index) {
+        if (checkIndex(index)) {
+            dataCollection.add(index, vehicle);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIndex(Integer index) {
+        return index > 0 && index < dataCollection.size();
     }
 
     private void removeId(Integer id) {
         dataIds.remove(id);
     }
 
+    @Override
+    public String toString() {
+        return dataCollection.toString();
+    }
+
     public boolean isEmpty() {
         return dataCollection.isEmpty();
     }
 
-    public Map<String, List<Worker>> guopByDate() {
-        Map<String, List<Worker>> groupedByDate = dataCollection.stream()
-                .collect(Collectors.groupingBy(Worker::getDayOfCreationDate));
-        return groupedByDate;
+
+    public Long sumOfDistanceTravelled() {
+        return dataCollection.stream().mapToLong(Vehicle::getDistanceTravelled).sum();
     }
 
-    public List<Worker> getAllByPosition(Position position) {
-        if (position == null) {
-            return dataCollection.stream().filter(x -> x.getPosition() == null).toList();
 
-        }
-        return dataCollection.stream().filter(x -> position.equals(x.getPosition())).toList();
-
-    }
-
-    public void poll() {
-        dataCollection.poll();
-    }
-
-    public long removeGreaterThanThis(Worker worker) {
-        long count = dataCollection.stream().filter((x -> x.compareTo(worker) > 0)).count();
-        dataCollection.removeAll(dataCollection.stream().filter(x -> x.compareTo(worker) > 0).toList());
+    public long removeLower(Vehicle vehicle) {
+        long count = dataCollection.stream().filter((x -> x.compareTo(vehicle) > 0)).count();
+        dataCollection.removeAll(dataCollection.stream().filter(x -> x.compareTo(vehicle) > 0).toList());
         return count;
     }
 
-    public long removeAllByPosition(Position position) {
-        if (position == null) {
-            long count = dataCollection.stream().filter((x -> x.getPosition() == null)).count();
-            List<Worker> workers = dataCollection.stream().filter(x -> x.getPosition() == null).toList();
-            for (Worker worker : workers) {
-                dataIds.remove(worker.getId());
-                organiztionNames.remove(worker.getOrganization().getFullName());
-            }
-            dataCollection.removeAll(workers);
-            return count;
-        }
-        long count = dataCollection.stream().filter((x -> position.equals(x.getPosition()))).count();
-        List<Worker> workers = dataCollection.stream().filter(x -> position.equals(x.getPosition())).toList();
-        for (Worker worker : workers) {
-            dataIds.remove(worker.getId());
-            organiztionNames.remove(worker.getOrganization().getFullName());
-        }
-        dataCollection.removeAll(workers);
-        return count;
-    }
-
-    private Integer getMaxSalary() {
-        Optional<Integer> maxSalary = dataCollection.stream().map(Worker::getSalary).max(Integer::compare);
-        return maxSalary.orElse(0);
-    }
-
-    public boolean addIfMax(Worker worker) {
-        if (worker.getSalary() > getMaxSalary()) {
-            add(worker);
-            return true;
-        }
-        return false;
-
-    }
-
-    private void removeNameOrganization(String name) {
-        organiztionNames.remove(name);
-    }
 
     public boolean removeByID(Integer id) {
         if (containsId(id)) {
-            Worker worker = dataCollection.stream().filter(x -> id.equals(x.getId())).findAny().get();
-            removeId(worker.getId());
-            removeNameOrganization(worker.getOrganization().getFullName());
-            dataCollection.remove(worker);
+            Vehicle vehicle = dataCollection.stream().filter(x -> id.equals(x.getId())).findAny().get();
+            removeId(vehicle.getId());
+            dataCollection.remove(vehicle);
             return true;
         }
         return false;
     }
 
 
-    public PriorityQueue<Worker> getDataCollection() {
-        return dataCollection;
+    public void add(Vehicle vehicle) {
+        vehicle.setId(getNewId());
+        vehicle.setCreationDate(new Date());
+        this.dataCollection.add(vehicle);
+        this.dataIds.add(vehicle.getId());
     }
 
-    public void add(Worker worker) {
-        worker.setId(getNewId());
-        this.dataCollection.add(worker);
-        this.dataIds.add(worker.getId());
-        this.organiztionNames.add(worker.getOrganization().getFullName());
-    }
-
-    public boolean organizationNameCheck(String name) {
-        return this.organiztionNames.contains(name);
-    }
 
     public String info() {
         return "type:" + dataCollection.getClass().toString()

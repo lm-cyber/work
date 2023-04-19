@@ -4,7 +4,7 @@ import madeby.common.util.CollectionManager;
 import madeby.common.util.FileManager;
 import madeby.common.util.JsonParser;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class SaveCommand extends Command {
     private final CollectionManager collectionManager;
@@ -18,8 +18,8 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute(String arg) {
         try {
-            fileManager.write(JsonParser.toJson(collectionManager.getDataCollection()));
-        } catch (FileNotFoundException e) {
+            fileManager.write(JsonParser.toJson(collectionManager.getCopyOfData()));
+        } catch (IOException e) {
             return new CommandResult("There was a problem saving a file. Please restart the program with another one");
         }
         return new CommandResult("The data was saved successfully");

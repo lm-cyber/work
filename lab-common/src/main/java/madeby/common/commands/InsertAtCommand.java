@@ -1,17 +1,16 @@
 package madeby.common.commands;
 
-import madeby.common.data.data_class.Vehicle;
 import madeby.common.util.CollectionManager;
 import madeby.common.util.InputManager;
 import madeby.common.util.OutputManager;
 import madeby.common.util.VehicleCreator;
 
-public class UpdateCommand extends Command {
+public class InsertAtCommand extends Command {
     private final CollectionManager collectionManager;
     private final InputManager inputManager;
     private final OutputManager outputManager;
 
-    public UpdateCommand(CollectionManager collectionManager, InputManager inputManager, OutputManager outputManager) {
+    public InsertAtCommand(CollectionManager collectionManager, InputManager inputManager, OutputManager outputManager) {
         this.collectionManager = collectionManager;
         this.inputManager = inputManager;
         this.outputManager = outputManager;
@@ -19,17 +18,16 @@ public class UpdateCommand extends Command {
 
     @Override
     public CommandResult execute(String arg) {
-        Integer id;
+        Integer index;
         try {
-            id = Integer.parseInt(arg);
+            index = Integer.parseInt(arg);
         } catch (NumberFormatException e) {
             return new CommandResult("Your argument was incorrect. The command was not executed.");
         }
-        if (collectionManager.containsId(id)) {
-            Vehicle vehicle = VehicleCreator.createVehicle(inputManager, outputManager, collectionManager);
-            collectionManager.update(vehicle, id);
-            return new CommandResult("Vehicle update");
+        if (collectionManager.checkIndex(index)) {
+            collectionManager.insertAt(VehicleCreator.createVehicle(inputManager, outputManager, collectionManager), index);
+            return new CommandResult("insert success");
         }
-        return new CommandResult("haven't id in collection");
+        return new CommandResult("Out of range");
     }
 }

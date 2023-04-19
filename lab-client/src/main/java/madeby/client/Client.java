@@ -21,21 +21,19 @@ public final class Client {
 
         final OutputManager outputManager = new OutputManager();
 
-
-        String filePath = System.getenv("DATAFORLAB5");
-        if ("".equals(filePath) || filePath == null) {
-            outputManager.println("This program needs a file name in envvar to work with.");
+        if (args.length == 0) {
+            outputManager.println("This program needs a file in argument to work with.");
             return;
         }
 
-        if (!filePath.endsWith(".json")) {
+        if (!args[0].endsWith(".json")) {
             outputManager.println("This program can only work with .json file.");
             return;
         }
         try (InputManager inputManager = new InputManager()) {
 
             final CollectionManager collectionManager = new CollectionManager();
-            final FileManager fileManager = new FileManager(filePath);
+            final FileManager fileManager = new FileManager(args[0]);
             final CommandManager commandManager = new CommandManager(fileManager, inputManager, collectionManager, outputManager);
             final Console console = new Console(fileManager,
                     inputManager, collectionManager, outputManager,

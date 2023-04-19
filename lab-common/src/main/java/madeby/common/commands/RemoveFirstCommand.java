@@ -14,7 +14,7 @@ public class RemoveFirstCommand extends Command {
         if (collectionManager.isEmpty()) {
             return new CommandResult("collection is empty");
         }
-        collectionManager.poll();
+        collectionManager.removeFirst();
         return new CommandResult("success delete");
     }
 

@@ -11,6 +11,6 @@ public class ShowCommand extends Command {
 
     @Override
     public CommandResult execute(String arg) {
-        return new CommandResult(collectionManager.getDataCollection().toString());
+        return new CommandResult(collectionManager.toString());
     }
 }

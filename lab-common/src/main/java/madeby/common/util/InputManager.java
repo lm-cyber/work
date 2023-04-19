@@ -1,8 +1,7 @@
 package madeby.common.util;
 
 import madeby.common.Exception.DoubleExecuteException;
-import madeby.common.data.data_class.Position;
-import madeby.common.data.data_class.Status;
+import madeby.common.data.data_class.VehicleType;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,6 +41,7 @@ public class InputManager implements AutoCloseable {
         }
         return longResult;
     }
+
     public Long readLongValueWithPrediction(String message, OutputManager outputManager, Predicate<Long> longPredicate) {
         boolean shouldContinue = true;
         Long longResult = null;
@@ -72,6 +72,22 @@ public class InputManager implements AutoCloseable {
         return doubleResult;
     }
 
+    public Double readDoubleValue(String message, OutputManager outputManager, Predicate<Double> doublePredicate) {
+        boolean shouldContinue = true;
+        Double doubleResult = null;
+        while (shouldContinue) {
+            outputManager.println("enter" + message + ":");
+            try {
+                doubleResult = Double.parseDouble(nextLine());
+                shouldContinue = doublePredicate.test(doubleResult);
+            } catch (NumberFormatException e) {
+                shouldContinue = true; // codestyle`
+            }
+        }
+        return doubleResult;
+    }
+
+
     public Integer readIntegerValue(String message, OutputManager outputManager) {
         boolean shouldContinue = true;
         Integer integerResult = null;
@@ -86,6 +102,7 @@ public class InputManager implements AutoCloseable {
         }
         return integerResult;
     }
+
     public Integer readIntegerValueWithPredicate(String message, OutputManager outputManager, Predicate<Integer> integerPredicate) {
         boolean shouldContinue = true;
         Integer integerResult = null;
@@ -155,35 +172,21 @@ public class InputManager implements AutoCloseable {
         return floatResult;
     }
 
-    public Status readStatusValue(String message, OutputManager outputManager) {
+
+    public VehicleType readTypeValue(String message, OutputManager outputManager) {
         boolean shouldContinue = true;
-        Status statusResult = null;
+        VehicleType vehicleType = null;
         while (shouldContinue) {
             outputManager.println("enter" + message + ":");
             try {
                 String line = nextLine();
-                statusResult = Status.valueOf(line);
+                vehicleType = "".equals(line) ? null : VehicleType.valueOf(line);
                 shouldContinue = false;
             } catch (IllegalArgumentException e) {
                 shouldContinue = true; // codestyle`
             }
         }
-        return statusResult;
-    }
-    public Position readPositionValue(String message, OutputManager outputManager) {
-        boolean shouldContinue = true;
-        Position positionResult = null;
-        while (shouldContinue) {
-            outputManager.println("enter" + message + ":");
-            try {
-                String line = nextLine();
-                positionResult = "".equals(line) ? null : Position.valueOf(line);
-                shouldContinue = false;
-            } catch (IllegalArgumentException e) {
-                shouldContinue = true; // codestyle`
-            }
-        }
-        return positionResult;
+        return vehicleType;
     }
 
     public LocalDateTime readBirthdayValue(String message, OutputManager outputManager) {
