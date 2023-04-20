@@ -15,7 +15,7 @@ public final class VehicleCreator {
         Vehicle.VehicleBuilder vehicleBuilder = Vehicle.builder();
         coordinatesBuilder.x(inputManager.readDoubleValue("Coordinates(x)", outputManager, x -> x > Coordinates.MAX_X));
         coordinatesBuilder.y(inputManager.readLongValue("Coordinates(y)", outputManager));
-        vehicleBuilder.type(inputManager.readTypeValue("PLANE\nBICYCLE\nHOVERBOARD,\nSPACESHIP\n\"\" to null\n", outputManager));
+        vehicleBuilder.type(inputManager.readTypeValue("PLANE\nBICYCLE\nHOVERBOARD,\nSPACESHIP\n\"\" to null", outputManager));
         vehicleBuilder.id(-1);
         vehicleBuilder.creationDate(new Date());
         vehicleBuilder.name(inputManager.readStringWithPredicatValue("name", outputManager, x -> x.length() < Vehicle.MIN_LEN_NAME));

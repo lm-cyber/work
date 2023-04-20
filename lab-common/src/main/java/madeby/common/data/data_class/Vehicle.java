@@ -1,10 +1,6 @@
 package madeby.common.data.data_class;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Data
+
 public class Vehicle implements Comparable<Vehicle> {
 
     public static final int MIN_LEN_NAME = 1;
@@ -69,5 +66,69 @@ public class Vehicle implements Comparable<Vehicle> {
         }
         return Integer.compare(this.enginePower, vehicle.getEnginePower());
 
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setEnginePower(int enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public void setCapacity(long capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setDistanceTravelled(Long distanceTravelled) {
+        this.distanceTravelled = distanceTravelled;
+    }
+
+    public void setType(VehicleType type) {
+        this.type = type;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public int getEnginePower() {
+        return enginePower;
+    }
+
+    public long getCapacity() {
+        return capacity;
+    }
+
+    public Long getDistanceTravelled() {
+        return distanceTravelled;
+    }
+
+    public VehicleType getType() {
+        return type;
     }
 }

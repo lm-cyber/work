@@ -26,7 +26,7 @@ public final class Client {
             return;
         }
 
-        if (!args[0].endsWith(".json")) {
+        if (!args[0].endsWith(".xml")) {
             outputManager.println("This program can only work with .json file.");
             return;
         }

@@ -1,0 +1,16 @@
+<list>
+  <item>
+    <id>0</id>
+    <name>123</name>
+    <coordinates>
+      <x>123.0</x>
+      <y>123</y>
+    </coordinates>
+    <enginePower>231</enginePower>
+    <capacity>213</capacity>
+    <distanceTravelled>231</distanceTravelled>
+    <type/>
+    <dayOfCreationDate>20/04/2023</dayOfCreationDate>
+    <date_field>2023-04-20T11:42:55Z</date_field>
+  </item>
+</list>

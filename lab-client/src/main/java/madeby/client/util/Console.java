@@ -8,7 +8,7 @@ import madeby.common.util.CollectionManager;
 import madeby.common.util.CommandManager;
 import madeby.common.util.FileManager;
 import madeby.common.util.InputManager;
-import madeby.common.util.JsonParser;
+import madeby.common.util.XMLparser;
 import madeby.common.util.OutputManager;
 import madeby.common.util.ParserToNameAndArg;
 
@@ -36,7 +36,7 @@ public class Console {
     public void start() throws IllegalArgumentException, JsonSyntaxException, IOException, DontCorrectJsonException {
         StringBuilder stringData = fileManager.read();
 
-        ArrayList<Vehicle> vehicles = JsonParser.toData(String.valueOf(stringData));
+        ArrayList<Vehicle> vehicles = XMLparser.toData(String.valueOf(stringData));
         collectionManager.initData(vehicles);
         startCommandCycle();
     }

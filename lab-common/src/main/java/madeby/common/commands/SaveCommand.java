@@ -2,7 +2,7 @@ package madeby.common.commands;
 
 import madeby.common.util.CollectionManager;
 import madeby.common.util.FileManager;
-import madeby.common.util.JsonParser;
+import madeby.common.util.XMLparser;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ public class SaveCommand extends Command {
     @Override
     public CommandResult execute(String arg) {
         try {
-            fileManager.write(JsonParser.toJson(collectionManager.getCopyOfData()));
+            fileManager.write(XMLparser.toJson(collectionManager.getCopyOfData()));
         } catch (IOException e) {
             return new CommandResult("There was a problem saving a file. Please restart the program with another one");
         }
