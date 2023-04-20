@@ -3,12 +3,14 @@ package madeby.common.util;
 import madeby.common.Exception.DontCorrectJsonException;
 import madeby.common.data.data_class.Vehicle;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
+@XmlRootElement
 public class CollectionManager {
     private final ArrayList<Vehicle> dataCollection;
     private final HashSet<Integer> dataIds;
