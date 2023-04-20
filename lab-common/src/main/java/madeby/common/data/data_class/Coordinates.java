@@ -2,11 +2,14 @@ package madeby.common.data.data_class;
 
 import lombok.*;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 @Data
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Builder
-
+@XmlRootElement
 public class Coordinates {
     public static final Double MAX_X = 274.0;
     @NonNull
@@ -28,10 +31,12 @@ public class Coordinates {
         this.y = y;
     }
 
+    @XmlElement
     public Double getX() {
         return x;
     }
 
+    @XmlElement
     public Long getY() {
         return y;
     }
